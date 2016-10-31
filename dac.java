@@ -24,32 +24,27 @@ public class dac{
 
   //Merge sort
   public static int[] mergeSort(int[] unsorted){
-      int pivot = Math.floor(Math.random()*unsorted.length);
+    if(unsorted.length<2){
+      return unsorted;
+    }
+      int pivot = (int) Math.floor(Math.random()*unsorted.length);
       return merge(mergeSort(Arrays.copyOfRange(unsorted,0,pivot)), mergeSort(Arrays.copyOfRange(unsorted,pivot,unsorted.length)));
   }
 
   public static int[] merge(int[] a, int[] b){
-    if(a.length == 0)
-      return b;
-    if(b.length == 0)
-      return a;
-
       int[] res = new int[a.length+b.length];
-      int o,i,j = 0;
-      while(o<res.length){
-        if(j >= b.length || a[i]<b[j] ){
-          res[o]=a[i]
-          i++;
+      int aPointer,bPointer;
+      aPointer = bPointer = 0;
+      for(int i = 0; i<res.length; i++){
+        if(bPointer >= b.length || (aPointer < a.length && a[aPointer]<b[bPointer] )){
+          res[i]=a[aPointer];
+          aPointer++;
         } else {
-          res[o]=b[j]
-          j++;
+          res[i]=b[bPointer];
+          bPointer++;
         }
-        o++;
     }
     return res;
-
-
-
   }
 
 
@@ -63,7 +58,8 @@ public class dac{
 
     System.out.println("\nSortera [54,2,7,9,445,8,9,34,-54,-56,-5,0,1231]");
     int[] mergeArray = {54,2,7,9,445,8,9,34,-54,-56,-5,0,1231};
-    System.out.println(mergeSort(mergeArray));
+    for(int i : mergeSort(mergeArray)) System.out.print("   " + i);
+
 
   }
 
